@@ -7,11 +7,18 @@ function App() {
   const [ageInput, setAgeInput] = useState("")
   const [sloganInput, setSloganInput] = useState("")
 
+  const reset = () => {
+    setNameInput("")
+    setAgeInput("")
+    setSloganInput("")
+  }
+
   return (
     <>
       <form
         onSubmit={(e) => {
           e.preventDefault();
+          reset();
         }}
       >
         <h3>Information form</h3>
