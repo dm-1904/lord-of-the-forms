@@ -1,11 +1,14 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import './App.css'
 import { TextInput } from './TextInput'
+import { PhoneInput } from './PhoneInput'
 
 function App() {
   const [nameInput, setNameInput] = useState("")
   const [ageInput, setAgeInput] = useState("")
   const [sloganInput, setSloganInput] = useState("")
+
+  const nameRef = useRef<HTMLInputElement>(null)
 
   const reset = () => {
     setNameInput("")
@@ -21,6 +24,13 @@ function App() {
           reset();
         }}
       >
+        <button
+          onClick={() => {
+            nameRef.current?.focus()
+          }}
+        >
+          Scroll to Slogan
+        </button>
         <h3>Information form</h3>
         <TextInput
           inputProps={{
@@ -28,7 +38,8 @@ function App() {
               setNameInput(e.target.value)
             },
             value: nameInput,
-            placeholder: "Rick Sanchez"
+            placeholder: "Rick Sanchez",
+            ref: nameRef,
           }}
           labelText={"Name"}
         />
@@ -52,6 +63,7 @@ function App() {
           }}
           labelText={"Slogan"}
         />
+        <PhoneInput />
         <input type="submit" value="Submit" />
       </form>
     </>
